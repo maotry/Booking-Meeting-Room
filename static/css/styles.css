@@ -1,0 +1,38 @@
+:root {
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --accent: #2455e6;
+  --success: #2e9e65;
+  --danger: #cd3e3e;
+  --text: #24324a;
+}
+* { box-sizing: border-box; }
+body { margin:0; font-family: Inter, Arial, sans-serif; background: var(--bg); color: var(--text); }
+.topbar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; background:#172033; color:white; padding:1rem 1.5rem; }
+.topbar nav { display:flex; gap:0.8rem; flex-wrap:wrap; }
+.topbar a { color:#dce6ff; text-decoration:none; font-weight:600; }
+.container { max-width: 1100px; margin: 1.5rem auto; padding: 0 1rem; }
+.room-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:1rem; }
+.card { background:var(--card); border-radius:12px; padding:1rem; box-shadow:0 8px 18px rgba(14,26,58,.08); }
+.badge { padding:0.3rem 0.7rem; border-radius:99px; font-size:0.8rem; font-weight:700; }
+.available { background:#dbf7e9; color:#15663c; }
+.booked { background:#ffe1e1; color:#7f1d1d; }
+.table-wrap { overflow:auto; background:var(--card); border-radius:12px; padding:0.3rem; }
+table { width:100%; border-collapse: collapse; }
+th,td { padding:0.75rem; border-bottom:1px solid #e5e9f2; text-align:left; }
+.actions { display:flex; gap:0.5rem; align-items:center; }
+form { margin:0; }
+button, .actions a { background:var(--accent); color:white; border:none; border-radius:8px; padding:0.45rem 0.8rem; text-decoration:none; cursor:pointer; font-weight:600; }
+button.danger { background: var(--danger); }
+.form-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:1rem; background:var(--card); padding:1rem; border-radius:12px; }
+.form-grid.compact { grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); }
+label { font-weight:600; display:flex; flex-direction:column; gap:0.35rem; }
+input, select { padding:0.55rem; border:1px solid #ccd3e0; border-radius:8px; }
+.flash-wrap { margin-bottom:1rem; }
+.flash { padding:0.7rem; border-radius:8px; margin-bottom:0.4rem; }
+.flash.success { background:#d8f8e8; color:#145d38; }
+.flash.error { background:#ffe0e0; color:#6f1e1e; }
+.section-head { display:flex; justify-content:space-between; align-items:center; }
+.calendar-list { display:grid; gap:0.7rem; }
+.calendar-item { background:var(--card); padding:0.9rem; border-radius:10px; }
+@media (max-width: 700px) { .topbar { align-items:flex-start; } }

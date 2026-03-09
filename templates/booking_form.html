@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ 'Create Booking' if mode == 'create' else 'Edit Booking' }}</h2>
+<form method="POST" class="form-grid">
+  <label>Room
+    <select name="room_id" required>
+      {% for room in rooms %}
+      <option value="{{ room.id }}" {% if booking and booking['room_id']|int == room.id %}selected{% endif %}>{{ room.code }} - {{ room.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label>Date
+    <input type="date" name="meeting_date" value="{{ booking['meeting_date'] if booking else '' }}" required>
+  </label>
+
+  <label>Start time
+    <input type="time" name="start_time" value="{{ booking['start_time'] if booking else '' }}" required>
+  </label>
+
+  <label>End time
+    <input type="time" name="end_time" value="{{ booking['end_time'] if booking else '' }}" required>
+  </label>
+
+  <label>Meeting title
+    <input type="text" name="meeting_title" value="{{ booking['meeting_title'] if booking else '' }}" required>
+  </label>
+
+  <label>Organizer name
+    <input type="text" name="organizer_name" value="{{ booking['organizer_name'] if booking else '' }}" required>
+  </label>
+
+  <label>Organizer email
+    <input type="email" name="organizer_email" value="{{ booking['organizer_email'] if booking else '' }}" required>
+  </label>
+
+  <button type="submit">{{ 'Create Booking' if mode == 'create' else 'Update Booking' }}</button>
+</form>
+{% endblock %}

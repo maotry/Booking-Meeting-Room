@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Calendar Schedule</h2>
+<div class="calendar-list">
+  {% for b in bookings %}
+    <div class="calendar-item">
+      <strong>{{ b.meeting_date }} | {{ b.start_time }} - {{ b.end_time }}</strong>
+      <p>{{ b.room_code }} - {{ b.room_name }}</p>
+      <p>{{ b.meeting_title }} ({{ b.organizer_name }})</p>
+    </div>
+  {% else %}
+    <p>No bookings available.</p>
+  {% endfor %}
+</div>
+{% endblock %}
