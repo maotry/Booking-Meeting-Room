@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin - Manage Rooms</h2>
+<form method="POST" class="form-grid compact">
+  <label>Room Code
+    <input type="text" name="code" required placeholder="Room5">
+  </label>
+  <label>Room Name
+    <input type="text" name="name" required placeholder="Meeting Room Floor 4">
+  </label>
+  <button type="submit">Add Room</button>
+</form>
+
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Code</th><th>Name</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody>
+      {% for room in rooms %}
+      <tr>
+        <td>{{ room.code }}</td>
+        <td>{{ room.name }}</td>
+        <td>{{ 'Active' if room.active else 'Inactive' }}</td>
+        <td>
+          <form method="POST" action="{{ url_for('toggle_room', room_id=room.id) }}">
+            <button type="submit">{{ 'Disable' if room.active else 'Enable' }}</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

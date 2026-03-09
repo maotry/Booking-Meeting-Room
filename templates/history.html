@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Booking History</h2>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Room</th><th>Title</th><th>Organizer</th><th>Date</th><th>Time</th><th>Status</th><th>Admin Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for b in bookings %}
+      <tr>
+        <td>{{ b.id }}</td>
+        <td>{{ b.room_code }}</td>
+        <td>{{ b.meeting_title }}</td>
+        <td>{{ b.organizer_name }}</td>
+        <td>{{ b.meeting_date }}</td>
+        <td>{{ b.start_time }} - {{ b.end_time }}</td>
+        <td><span class="badge {{ 'available' if b.status == 'active' else 'booked' }}">{{ b.status }}</span></td>
+        <td>
+          <form method="POST" action="{{ url_for('delete_booking', booking_id=b.id) }}" onsubmit="return confirm('Delete permanently?')">
+            <button type="submit" class="danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="8">No booking history.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

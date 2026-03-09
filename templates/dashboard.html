@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+  <h2>Room Dashboard</h2>
+  <div class="room-grid">
+    {% for room in rooms %}
+      <article class="card">
+        <h3>{{ room.code }}</h3>
+        <p>{{ room.name }}</p>
+        {% set status = availability[room.id] %}
+        <span class="badge {{ 'available' if status == 'Available' else 'booked' }}">{{ status }}</span>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <h2>Upcoming Active Bookings</h2>
+    <form method="POST" action="{{ url_for('send_reminders') }}">
+      <button type="submit">Send 30-min Reminders</button>
+    </form>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Room</th><th>Title</th><th>Organizer</th><th>Date</th><th>Time</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for b in bookings %}
+        <tr>
+          <td>{{ b.room_code }} - {{ b.room_name }}</td>
+          <td>{{ b.meeting_title }}</td>
+          <td>{{ b.organizer_name }}</td>
+          <td>{{ b.meeting_date }}</td>
+          <td>{{ b.start_time }} - {{ b.end_time }}</td>
+          <td class="actions">
+            <a href="{{ url_for('edit_booking', booking_id=b.id) }}">Edit</a>
+            <form method="POST" action="{{ url_for('cancel_booking', booking_id=b.id) }}" onsubmit="return confirm('Cancel this booking?')">
+              <button type="submit" class="danger">Cancel</button>
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="6">No active bookings.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
